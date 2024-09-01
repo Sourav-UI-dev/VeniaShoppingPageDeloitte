@@ -77,7 +77,14 @@ const fetchProducts = async (limit) => {
     if (allProducts.length === 0) {
       allProducts = results; // Initialize the products array if it's empty
     } else {
-      allProducts = [...allProducts, ...results]; // Append more products to the array
+      // Extract existing product IDs
+      const existingProductIds = new Set(allProducts.map(product => product.id));
+
+      // Filter new products to only include those not already in the array
+      const newProducts = results.filter(product => !existingProductIds.has(product.id));
+
+      // Add only the new products to allProducts
+      allProducts = [...allProducts, ...newProducts];
     }
     filteredProducts = allProducts;
 
