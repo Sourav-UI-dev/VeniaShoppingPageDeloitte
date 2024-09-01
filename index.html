@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Venia</title>
+</head>
+
+<body>
+
+
+  <header class="navbar">
+    <!-- Barding -->
+    <div class="navbar-left">
+      <div class="menu-icon" id="menu-icon" aria-label="Open Sidebar">&#9776;</div> <!-- Hamburger Icon for mobile -->
+      <span class="brand">Venia</span>
+    </div>
+    <!-- Nav Bar  -->
+    <nav class="navbar-center" id="navbar-center">
+      <ul class="nav-links">
+        <li><a href="#" class="active">Home</a></li>
+        <li><a href="#">Men</a></li>
+        <li><a href="#">Women</a></li>
+        <li><a href="#">Smart Gears</a></li>
+        <li><a href="#">Accessories</a></li>
+      </ul>
+    </nav>
+    <div class="navbar-right">
+      <span class="cart-icon">
+        <img src="./public/images/bag-icon.svg" alt="Cart Icon" />
+      </span>
+    </div>
+  </header>
+
+  <!-- This is the banner for carousel or static picture for add -->
+  <div class="banner">
+    <img src="./public/images/men_s_fashion__banner_.jpg" alt="Banner Image" class="banner-image">
+    <div class="text-block">
+      <h1>Men’s Outerwear</h1>
+      <div class="underline"></div>
+    </div>
+  </div>
+
+  <!-- Side panel which opens from right side in small screen when filter button clicked -->
+  <div class="sidebar" aria-label="Sidebar">
+    <button class="close-button" aria-label="Close Sidebar">
+      <img alt="Close Icon" src="./public/images/close-icon.svg" />
+    </button>
+    <div id="filter-group" class="sidebar-filter">
+      <h3>Filters</h3>
+      <hr /><br />
+      <button class="btnClearAll" aria-label="Clear All Button">Clear All</button>
+      <hr />
+      <h5>Categories</h5>
+      <div id="sidebar-category-filter">
+        <!-- categories will be binded dynamically -->
+      </div>
+      <div id="price-range-filter" class="sidebar-filter">
+        <h5>Price Range</h5>
+        <hr />
+        <label for="min-price">Min Price:</label>
+        <input type="number" id="min-price1" name="min-price" min="0" step="0.01" placeholder="0.00">
+        <label for="max-price">Max Price:</label>
+        <input type="number" id="max-price1" name="max-price" min="0" step="0.01" placeholder="100.00">
+        <button id="apply-price-filter" aria-label="Apply Price Range Filter">See Results</button>
+      </div>
+      <!-- <button id="apply-filter-button" class="apply-filters" aria-label="See Results Button">See Results</button> -->
+    </div>
+  </div>
+
+  <main class="main-content container">
+
+    <!-- Spinner overlay -->
+    <div id="loader" class="overlay-loader" aria-live="polite">
+      <div class="spinner" role="status" aria-label="Loading"></div>
+    </div>
+
+    <!-- Error Messages -->
+    <div id="error-message" class="error-message" aria-live="polite" style="display: none;">
+      <span id="error-icon" class="error-icon"></span>
+      <p id="error-text"></p>
+    </div>
+
+    <section id="main-section">
+      <!-- search bar to search product by name or keyword -->
+      <div class="search-container">
+        <input type="text" id="search-bar" placeholder="Search products..." aria-label="Search products" />
+        <!-- <button id="search-button" aria-label="Search button">Search</button> -->
+      </div>
+
+      <!-- breadcrumb, Sorting and total count -->
+      <div class="selectors">
+
+        <ul class="breadcrumb">
+          <li><a href="#">Clothing</a></li>
+          <li><a href="#">Men's</a></li>
+          <li>Outerwear</li>
+        </ul>
+
+        <section class="sort-options">
+          <p><span id="product-count">0</span> Results</p>
+          <!-- Sorting Dropdown -->
+          <select id="sort-options">
+            <option value="default">Sort by</option>
+            <option value="price-asc">Price: Low to High</option>
+            <option value="price-desc">Price: High to Low</option>
+          </select>
+
+          <!-- this section is for small screen -->
+          <div class="button-container">
+            <button class="btnFilter" aria-label="Open Filter Menu">
+              <img src="/public/images/filter-icon.svg" alt="Filter Icon" /> Filter Results
+            </button>
+            <button class="btnSort" aria-label="Open Sorting options" onclick="toggleOptions()">
+              <img src="/public/images/sort-icon.svg" alt="Sort Icon" /> Sort Results
+            </button>
+
+            <div class="custom-sort-options" id="sortOptions">
+              <a href="#" id="sort-low-to-high">Price: Low to High</a>
+              <a href="#" id="sort-high-to-low">Price: High to Low</a>
+            </div>
+          </div>
+
+        </section>
+      </div>
+
+      <!-- This is the container for the products -->
+      <div class="product-container">
+
+        <!-- Category Filter -->
+        <div id="filter-group" class="filter">
+          <h3>Filters</h3>
+          <hr /><br />
+          <button class="btnClearAll" aria-label="Clear All Button">Clear All</button>
+          <hr />
+          <h5>Categories</h5>
+          <div id="category-filter">
+            <!-- categories will be binded dynamically -->
+
+          </div>
+
+          <div id="price-range-filter" class="sidebar-filter">
+            <h5>Price Range</h5>
+            <hr />
+            <label for="min-price">Min Price:</label>
+            <input type="number" id="min-price2" name="min-price" min="0" step="0.01" placeholder="0.00">
+            <label for="max-price">Max Price:</label>
+            <input type="number" id="max-price2" name="max-price" min="0" step="0.01" placeholder="100.00">
+            <button id="apply-price-filter" aria-label="Apply Price Range Filter">See Results</button>
+          </div>
+          <!-- <button id="apply-filters" class="apply-filters" aria-label="See Results Button">See Results</button> -->
+        </div>
+
+        <!-- All Product Cards -->
+        <section id="product-container" class="product-grid">
+          <!-- Products will be inserted dynamically -->
+        </section>
+        <!-- No Data Message -->
+        <div id="no-data-message" class="no-data-message">
+          <span class="no-data-icon"></span>
+          <p>No products found. Please adjust your filters or search criteria.</p>
+        </div>
+      </div>
+
+      <button id="load-more" class="load-more" aria-label="Load More button">Load More</button>
+
+    </section>
+
+
+
+  </main>
+  
+  <!-- Sub-Footer -->
+  <div class="sub-footer">
+    <div class="footer-column">
+      <h3>Account</h3>
+      <ul>
+        <li><a href="#">Sign In</a></li>
+        <li><a href="#">Register</a></li>
+        <li><a href="#">Order Status</a></li>
+      </ul>
+    </div>
+    <div class="footer-column">
+      <h3>About Us</h3>
+      <ul>
+        <li><a href="#">Our Story</a></li>
+        <li><a href="#">Careers</a></li>
+      </ul>
+    </div>
+    <div class="footer-column">
+      <h3>Help</h3>
+      <ul>
+        <li><a href="#">Contact Us</a></li>
+        <li><a href="#">Order Status</a></li>
+        <li><a href="#">Returns</a></li>
+      </ul>
+    </div>
+    <div class="footer-column right-column">
+      <h3>Follow Us!</h3>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.
+      </p>
+      <div class="social-icons">
+        <a href="#"><img src="instagram.svg" alt="Instagram"></a>
+        <a href="#"><img src="facebook.svg" alt="Facebook"></a>
+        <a href="#"><img src="twitter.svg" alt="Twitter"></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-left">
+      <p>VENIA</p>
+    </div>
+    <div class="footer-center">
+      <p>&copy; Company Name Address Ave, City Name, State ZIP</p>
+    </div>
+    <div class="footer-right">
+      <a href="#">Terms of Use</a>
+      <a href="#">Privacy Policy</a>
+    </div>
+  </footer>
+
+  <script type="module" src="/main.js"></script>
+</body>
+
+</html>
