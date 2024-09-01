@@ -1,4 +1,4 @@
-import './styles.css';
+import '/styles.css';
 
 // Toggle the menu on mobile view
 const menuIcon = document.getElementById('menu-icon');
