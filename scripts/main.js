@@ -110,7 +110,7 @@ const renderProducts = (products) => {
           <img class="product-image" src="${product.image}" alt="${product.title}">
           <h2>${product.title.slice(0, 25)}...</h2>
           <p>$${product.price}</p>
-          <span><img src="/public/images/wishlist-icon.svg" alt="wishlist-icon"/>
+          <span><img src="public/images/wishlist-icon.svg" alt="wishlist-icon"/>
         </div>`;
     productContainer.innerHTML += productHTML;
   });

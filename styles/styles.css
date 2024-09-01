@@ -18,6 +18,13 @@ main {
   flex-grow: 1;
 }
 
+hr {
+  border: 1px solid #333;
+  /* Dark gray color */
+  margin: 20px 0;
+  /* Space above and below */
+}
+
 .container {
   width: 100%;
   padding: 0 15px;
@@ -689,19 +696,19 @@ ul.breadcrumb li a:hover {
 }
 
 .error-message .error-icon.network {
-  background: url('/public/images/network-error-icon.svg') no-repeat center center;
+  background: url('public/images/network-error-icon.svg') no-repeat center center;
   width: 24px;
   height: 24px;
 }
 
 .error-message .error-icon.api {
-  background: url('/public/images/api-error-icon.svg') no-repeat center center;
+  background: url('public/images/api-error-icon.svg') no-repeat center center;
   width: 24px;
   height: 24px;
 }
 
 .error-message .error-icon.no-data {
-  background: url('/public/images/no-data-icon.svg') no-repeat center center;
+  background: url('public/images/no-data-icon.svg') no-repeat center center;
   width: 24px;
   height: 24px;
 }
@@ -719,7 +726,7 @@ ul.breadcrumb li a:hover {
 
 .no-data-icon {
   margin-right: 10px;
-  background: url('/public/images/no-data-icon.svg') no-repeat center center;
+  background: url('public/images/no-data-icon.svg') no-repeat center center;
   width: 24px;
   height: 24px;
 }
